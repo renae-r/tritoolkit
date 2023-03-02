@@ -5,7 +5,7 @@ description = "A collection of tools for working with EPA TRI data"
 authors = ["Renae Rodgers <rodge103@umn.edu>"]
 license = "Mozilla Public License 2.0 (MPL 2.0)"
 packages = [
-    { include = "epa-tri-toolkit", from = "src" }
+    { include = "tritoolkit", from = "src" }
 ]
 
 [tool.poetry.dependencies]
