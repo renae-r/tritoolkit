@@ -13,6 +13,7 @@ python = "^3.8"
 pandas = "^1.5.3"
 requests = "^2.25.1"
 joblib = "^1.2.0"
+importlib-metadata = "^4.6"
 
 # Documentation dependencies
 # Note that these are currently required to be specified in this section
