@@ -11,6 +11,90 @@ interactions:
       User-Agent:
       - python-requests/2.28.2
     method: GET
+    uri: https://data.epa.gov/efservice/TRI_CHEM_INFO/COUNT/JSON
+  response:
+    body:
+      string: '{"status": "COMPLETED"}'
+    headers:
+      Access-Control-Allow-Methods:
+      - HEAD, GET, POST
+      Access-Control-Allow-Origin:
+      - '*'
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '23'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 10 Mar 2023 06:44:43 GMT
+      Location:
+      - https://enviro.epa.gov/api-cache/rest/c82e74ab-ef1c-4886-99f9-4bce1507c50a.json
+      X-Amzn-Trace-Id:
+      - Root=1-640ad1da-311fa548072cf10231a173a3;Sampled=0
+      X-redirect-reason:
+      - Not yet ready.
+      x-amz-apigw-id:
+      - BjW6OH_-oAMFjYg=
+      x-amzn-RequestId:
+      - 9937904e-dc4a-4312-9126-07abc2d25302
+    status:
+      code: 303
+      message: See Other
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.28.2
+    method: GET
+    uri: https://enviro.epa.gov/api-cache/rest/c82e74ab-ef1c-4886-99f9-4bce1507c50a.json
+  response:
+    body:
+      string: '[{"TOTALQUERYRESULTS":831}]'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '27'
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 10 Mar 2023 06:44:43 GMT
+      ETag:
+      - '"a311cc403f64aaca26107916b3fb48d6"'
+      Last-Modified:
+      - Thu, 16 Feb 2023 07:01:07 GMT
+      Server:
+      - nginx/1.23.3
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-XSS-Protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.28.2
+    method: GET
     uri: https://data.epa.gov/efservice/TRI_CHEM_INFO/CHEM_NAME/Dioxin%20and%20dioxin-like%20compounds/CSV
   response:
     body:
@@ -27,17 +111,17 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Fri, 10 Mar 2023 00:52:27 GMT
+      - Fri, 10 Mar 2023 06:44:44 GMT
       Location:
       - https://enviro.epa.gov/api-cache/rest/34f772a9-ae4d-4a13-a275-e0ef7b4772a5.csv
       X-Amzn-Trace-Id:
-      - Root=1-640a7f4b-3bcedbf969ccc4c220ec3387;Sampled=0
+      - Root=1-640ad1db-43c424dc7d0382080e179a80;Sampled=0
       X-redirect-reason:
       - Not yet ready.
       x-amz-apigw-id:
-      - BijT2H0roAMFztw=
+      - BjW6aEW4oAMFm0g=
       x-amzn-RequestId:
-      - 91a1a101-9686-4d3a-9983-53d3954c21af
+      - 96001a35-c4fe-4c91-8287-e22c93b37e63
     status:
       code: 303
       message: See Other
@@ -71,11 +155,95 @@ interactions:
       Content-Type:
       - text/csv
       Date:
-      - Fri, 10 Mar 2023 00:52:28 GMT
+      - Fri, 10 Mar 2023 06:44:44 GMT
       ETag:
       - '"28911ecb15323bf348372fe3a8653d93"'
       Last-Modified:
       - Fri, 24 Feb 2023 04:47:39 GMT
+      Server:
+      - nginx/1.23.3
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-XSS-Protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.28.2
+    method: GET
+    uri: https://data.epa.gov/efservice/TRI_REPORTING_FORM/COUNT/JSON
+  response:
+    body:
+      string: '{"status": "COMPLETED"}'
+    headers:
+      Access-Control-Allow-Methods:
+      - HEAD, GET, POST
+      Access-Control-Allow-Origin:
+      - '*'
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '23'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 10 Mar 2023 06:44:45 GMT
+      Location:
+      - https://enviro.epa.gov/api-cache/rest/289a026e-ae12-4ac9-9da8-8c88d7652319.json
+      X-Amzn-Trace-Id:
+      - Root=1-640ad1dc-049f588b6c519e8c1a543a44;Sampled=0
+      X-redirect-reason:
+      - Not yet ready.
+      x-amz-apigw-id:
+      - BjW6kH-PoAMFU9A=
+      x-amzn-RequestId:
+      - 9e19fba1-1cfe-41af-9fd7-edb7aeb1909f
+    status:
+      code: 303
+      message: See Other
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.28.2
+    method: GET
+    uri: https://enviro.epa.gov/api-cache/rest/289a026e-ae12-4ac9-9da8-8c88d7652319.json
+  response:
+    body:
+      string: '[{"TOTALQUERYRESULTS":2977192}]'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '31'
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 10 Mar 2023 06:44:46 GMT
+      ETag:
+      - '"e78a4eb554c050afa7133b61a0ce076a"'
+      Last-Modified:
+      - Thu, 16 Feb 2023 07:05:37 GMT
       Server:
       - nginx/1.23.3
       Strict-Transport-Security:
@@ -115,17 +283,17 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Fri, 10 Mar 2023 00:52:29 GMT
+      - Fri, 10 Mar 2023 06:44:46 GMT
       Location:
       - https://enviro.epa.gov/api-cache/rest/e5295dcd-2bcb-40bb-b14f-139096bb7f1d.csv
       X-Amzn-Trace-Id:
-      - Root=1-640a7f4c-643d3aca78a53ebe2afca9a7;Sampled=0
+      - Root=1-640ad1de-133bbee57da13ae46e007237;Sampled=0
       X-redirect-reason:
       - Not yet ready.
       x-amz-apigw-id:
-      - BijUCEwLIAMFhpg=
+      - BjW6xHeKIAMFbIA=
       x-amzn-RequestId:
-      - 707785ca-cb1d-40b8-b8d0-4ac5e1b661a0
+      - 1b1b20ba-fd3d-46c5-a547-1e03e30cf8d6
     status:
       code: 303
       message: See Other
@@ -3518,7 +3686,7 @@ interactions:
       Content-Type:
       - text/csv
       Date:
-      - Fri, 10 Mar 2023 00:52:29 GMT
+      - Fri, 10 Mar 2023 06:44:47 GMT
       ETag:
       - '"52cbcbb472651591e34f55a19ad78149"'
       Last-Modified:

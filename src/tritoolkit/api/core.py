@@ -1,6 +1,7 @@
 from io import StringIO
 from functools import wraps
 from typing import Optional
+import warnings
 
 import pandas as pd
 import requests
@@ -65,9 +66,10 @@ class Table(TriApiClient):
         super().__init__()
         self.name = name
         self.table_url = f"{self.base_url}/{self.name.upper()}"
+        self.rows = self._get_rows()
+        self.segments = list(self._divide_rows_into_chunks(range(0, self.rows + 1), 10000))
         
-    @property
-    def rows(self):
+    def _get_rows(self):
         count = self.get(f"{self.table_url}/COUNT/JSON")
         total_rows = count.json()[0]["TOTALQUERYRESULTS"]
         return total_rows
@@ -101,34 +103,60 @@ class Table(TriApiClient):
         table_df = pd.read_csv(table_data, sep=",")
         return table_df
         
-    def get_row_range(self, row_min, row_max):
+    def get_row_range(self, row_min, row_max, url=None):
+        # if url not specified, default standard table url
+        if url is None:
+            _url = f"{self.table_url}/rows/{row_min}:{row_max}/CSV/"
+        else:
+            # if url ends with CSV, chop that off
+            url_list = url.split("/")
+            if url_list[-1] == "CSV":
+                # add in the row bits
+                url_list[-1] = f"rows/{row_min}:{row_max}/CSV/"
+            else:
+                url_list.append(f"rows/{row_min}:{row_max}/CSV/")
+            _url = "/".join(url_list)
         # get table section
-        csv_str = self.get(f"{self.table_url}/rows/{row_min}:{row_max}/CSV/")
+        csv_str = self.get(f"{_url}")
         csv_str.raise_for_status()
         # put it into a data frame
         table_df = self._csv_string_to_df(csv_str.text)   
         return table_df
     
+    def  _whole_table(self, url):
+        if self.rows < 10001:
+            df = self.get_row_range(0, self.rows, url)
+        else:
+            # use all but 2 cpu
+            df_segments = Parallel(n_jobs=-3, verbose=1)\
+                                    (delayed(self.get_row_range)
+                                            (str(i[0]), str(i[1]), url) 
+                                    for i in self.segments)
+            df = pd.concat(df_segments, ignore_index=True)
+        return df
+    
     def filter_on_single_values(self, filter_dict={}):
         updated_url = [self.table_url]
-        # need better error handling for non-existant columns
+        # TODO: better error handling for non-existant columns
         for col in filter_dict.keys():
             updated_url.append(f"{col.upper()}/{filter_dict[col.upper()]}")
         updated_url.append("CSV")
         filtered_url = "/".join(updated_url)
         csv_str = self.get(filtered_url).text
         table_df = self._csv_string_to_df(csv_str)
+        # if the table has exactly 10001 records, that means that
+        # the request maxed out the number of rows that could be requested
+        # in this case, we'll grab and filter the whole table...
+        # should probably raise a warning of some kind
+        # TODO: raise a warning - let the user figure out what to do
+        if len(table_df.index) == 10001:
+            print("...need to look at the whole table")
+            table_df = self._whole_table(filtered_url)
+            for filter in filter_dict.keys():
+                table_df = table_df[table_df[filter] == filter_dict[filter]]
         return table_df
     
     def filter_on_multiple_values(self, filter_column, filter_values):
-        max_row = self.rows
-        # break the range of maximum row into chunks of 10k
-        row_tuples = list(self._divide_rows_into_chunks(range(0, max_row + 1), 10000))
-        # use all but 2 cpu
-        df_segments = Parallel(n_jobs=-3, verbose=1)\
-                                 (delayed(self.get_row_range)
-                                         (str(i[0]), str(i[1])) 
-                                  for i in row_tuples)
-        df = pd.concat(df_segments, ignore_index=True)
+        df = self._whole_table(self.table_url)
         filtered_df = df[df[filter_column].isin(filter_values)]
         return filtered_df

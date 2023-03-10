@@ -27,17 +27,17 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Fri, 10 Mar 2023 00:52:30 GMT
+      - Fri, 10 Mar 2023 06:44:48 GMT
       Location:
       - https://enviro.epa.gov/api-cache/rest/d3854d7d-09b7-4522-8af3-66c362436e35.json
       X-Amzn-Trace-Id:
-      - Root=1-640a7f4e-4c1901e57f229ad20ce9bc05;Sampled=0
+      - Root=1-640ad1e0-348778024b0c1dda771f541d;Sampled=0
       X-redirect-reason:
       - Not yet ready.
       x-amz-apigw-id:
-      - BijUUHJ0IAMFmEQ=
+      - BjW7FGwzIAMFfHg=
       x-amzn-RequestId:
-      - 1c02689d-21d0-4cc6-ba64-77734ac0b418
+      - 4f867b50-f9a7-49d4-a209-19431b47d14c
     status:
       code: 303
       message: See Other
@@ -67,7 +67,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 10 Mar 2023 00:52:31 GMT
+      - Fri, 10 Mar 2023 06:44:49 GMT
       ETag:
       - '"8eeedd5ebed8f22e3193c0ff74118901"'
       Last-Modified:
