@@ -1,0 +1,90 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.28.2
+    method: GET
+    uri: https://data.epa.gov/efservice/TRI_CHEM_INFO/CHEM_NAME/Dioxin%20and%20dioxin-like%20compounds/CSV
+  response:
+    body:
+      string: '{"status": "COMPLETED"}'
+    headers:
+      Access-Control-Allow-Methods:
+      - HEAD, GET, POST
+      Access-Control-Allow-Origin:
+      - '*'
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '23'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 10 Mar 2023 00:35:44 GMT
+      Location:
+      - https://enviro.epa.gov/api-cache/rest/34f772a9-ae4d-4a13-a275-e0ef7b4772a5.csv
+      X-Amzn-Trace-Id:
+      - Root=1-640a7b60-36218aa50248998c16db7bd1;Sampled=0
+      X-redirect-reason:
+      - Not yet ready.
+      x-amz-apigw-id:
+      - Big3GEWNoAMFshg=
+      x-amzn-RequestId:
+      - 2345cefb-40f4-48b9-9a04-b39ad085637a
+    status:
+      code: 303
+      message: See Other
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.28.2
+    method: GET
+    uri: https://enviro.epa.gov/api-cache/rest/34f772a9-ae4d-4a13-a275-e0ef7b4772a5.csv
+  response:
+    body:
+      string: 'TRI_CHEM_ID,CHEM_NAME,ACTIVE_DATE,INACTIVE_DATE,CAAC_IND,CARC_IND,R3350_IND,METAL_IND,FEDS_IND,CLASSIFICATION,PBT_START_YEAR,PBT_END_YEAR,NO_DECIMALS,UNIT_OF_MEASURE,CAS_REGISTRY_NUMBER,SRS_ID,DEFAULT_PERCENTAGE_TO_81C,DEFAULT_PERCENTAGE_TO_81D,DEFAULT_PERCENTAGE_TO_87,PFAS_IND,PBT_IND
+
+        "N150","Dioxin and dioxin-like compounds","2000","9999","1","1","0","0","0","2","2000","9999","7","Grams","N150","755371","0","0","100","0","1"
+
+        '
+    headers:
+      Accept-Ranges:
+      - bytes
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '431'
+      Content-Type:
+      - text/csv
+      Date:
+      - Fri, 10 Mar 2023 00:35:45 GMT
+      ETag:
+      - '"28911ecb15323bf348372fe3a8653d93"'
+      Last-Modified:
+      - Fri, 24 Feb 2023 04:47:39 GMT
+      Server:
+      - nginx/1.23.3
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-XSS-Protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+version: 1
