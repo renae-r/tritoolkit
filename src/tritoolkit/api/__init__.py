@@ -1,5 +1,5 @@
 """
 Convenience imports from api
 """
-from .core import *
+from .core import TriApiClient
 from .exceptions import *
