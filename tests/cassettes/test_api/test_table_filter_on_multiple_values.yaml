@@ -11,7 +11,7 @@ interactions:
       User-Agent:
       - python-requests/2.28.2
     method: GET
-    uri: https://data.epa.gov/efservice/TRI_CHEM_INFO/CHEM_NAME/Dioxin%20and%20dioxin-like%20compounds/CSV
+    uri: https://data.epa.gov/efservice/TRI_FACILITY/COUNT/JSON
   response:
     body:
       string: '{"status": "COMPLETED"}'
@@ -27,17 +27,17 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Fri, 10 Mar 2023 00:33:48 GMT
+      - Fri, 10 Mar 2023 00:52:30 GMT
       Location:
-      - https://enviro.epa.gov/api-cache/rest/34f772a9-ae4d-4a13-a275-e0ef7b4772a5.csv
+      - https://enviro.epa.gov/api-cache/rest/d3854d7d-09b7-4522-8af3-66c362436e35.json
       X-Amzn-Trace-Id:
-      - Root=1-640a7aec-0ce735e23c2be00d332313de;Sampled=0
+      - Root=1-640a7f4e-4c1901e57f229ad20ce9bc05;Sampled=0
       X-redirect-reason:
       - Not yet ready.
       x-amz-apigw-id:
-      - BiglBFXaoAMFS7g=
+      - BijUUHJ0IAMFmEQ=
       x-amzn-RequestId:
-      - 437f768f-9f09-4bc7-9ed8-f6e0af3f85ef
+      - 1c02689d-21d0-4cc6-ba64-77734ac0b418
     status:
       code: 303
       message: See Other
@@ -53,29 +53,25 @@ interactions:
       User-Agent:
       - python-requests/2.28.2
     method: GET
-    uri: https://enviro.epa.gov/api-cache/rest/34f772a9-ae4d-4a13-a275-e0ef7b4772a5.csv
+    uri: https://enviro.epa.gov/api-cache/rest/d3854d7d-09b7-4522-8af3-66c362436e35.json
   response:
     body:
-      string: 'TRI_CHEM_ID,CHEM_NAME,ACTIVE_DATE,INACTIVE_DATE,CAAC_IND,CARC_IND,R3350_IND,METAL_IND,FEDS_IND,CLASSIFICATION,PBT_START_YEAR,PBT_END_YEAR,NO_DECIMALS,UNIT_OF_MEASURE,CAS_REGISTRY_NUMBER,SRS_ID,DEFAULT_PERCENTAGE_TO_81C,DEFAULT_PERCENTAGE_TO_81D,DEFAULT_PERCENTAGE_TO_87,PFAS_IND,PBT_IND
-
-        "N150","Dioxin and dioxin-like compounds","2000","9999","1","1","0","0","0","2","2000","9999","7","Grams","N150","755371","0","0","100","0","1"
-
-        '
+      string: '[{"TOTALQUERYRESULTS":62748}]'
     headers:
       Accept-Ranges:
       - bytes
       Connection:
       - keep-alive
       Content-Length:
-      - '431'
+      - '29'
       Content-Type:
-      - text/csv
+      - application/json
       Date:
-      - Fri, 10 Mar 2023 00:33:49 GMT
+      - Fri, 10 Mar 2023 00:52:31 GMT
       ETag:
-      - '"28911ecb15323bf348372fe3a8653d93"'
+      - '"8eeedd5ebed8f22e3193c0ff74118901"'
       Last-Modified:
-      - Fri, 24 Feb 2023 04:47:39 GMT
+      - Thu, 16 Feb 2023 07:02:40 GMT
       Server:
       - nginx/1.23.3
       Strict-Transport-Security:
