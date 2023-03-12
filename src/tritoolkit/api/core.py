@@ -100,8 +100,23 @@ class Table(TriApiClient):
     def _csv_string_to_df(self, csv_string):
         # make it a table
         table_data = StringIO(csv_string)
-        table_df = pd.read_csv(table_data, sep=",")
+        # skip bad lines for now
+        # TODO: incorporate database schema info to be able to specify
+        # column names and retain bad/incomplete lines. Test on Forms
+        table_df = pd.read_csv(table_data, sep=",", on_bad_lines="skip")
         return table_df
+    
+    def  whole_table(self, url):
+        if self.rows < 10001:
+            df = self.get_row_range(0, self.rows, url)
+        else:
+            # use all but 2 cpu
+            df_segments = Parallel(n_jobs=-3, verbose=1)\
+                                    (delayed(self.get_row_range)
+                                            (str(i[0]), str(i[1]), url) 
+                                    for i in self.segments)
+            df = pd.concat(df_segments, ignore_index=True)
+        return df
         
     def get_row_range(self, row_min, row_max, url=None):
         # if url not specified, default standard table url
@@ -122,18 +137,6 @@ class Table(TriApiClient):
         # put it into a data frame
         table_df = self._csv_string_to_df(csv_str.text)   
         return table_df
-    
-    def  _whole_table(self, url):
-        if self.rows < 10001:
-            df = self.get_row_range(0, self.rows, url)
-        else:
-            # use all but 2 cpu
-            df_segments = Parallel(n_jobs=-3, verbose=1)\
-                                    (delayed(self.get_row_range)
-                                            (str(i[0]), str(i[1]), url) 
-                                    for i in self.segments)
-            df = pd.concat(df_segments, ignore_index=True)
-        return df
     
     def filter_on_single_values(self, filter_dict={}):
         updated_url = [self.table_url]
