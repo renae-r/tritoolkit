@@ -13,11 +13,13 @@ from .exceptions import (
     TriApiError,
 )
 
+
 def retry_on_transient_error(func):
     """
     Retry a request up to self.num_retries times. If it exits with a
     ``TransientIpumsApiException``, then retry, else just immediately ``raise``
     """
+
     @wraps(func)
     def wrapped_func(self, *args, **kwargs):
         for _ in range(self.num_retries - 1):
@@ -33,14 +35,14 @@ def retry_on_transient_error(func):
 class TriApiClient:
     def __init__(
         self,
-        base_url: str = 'https://data.epa.gov/efservice',
+        base_url: str = "https://data.epa.gov/efservice",
         num_retries: int = 3,
         session: Optional[requests.Session] = None,
     ):
         self.num_retries = num_retries
         self.base_url = base_url
         self.session = session or requests.session()
-        
+
     @retry_on_transient_error
     def request(self, method: str, *args, **kwargs) -> requests.Response:
         """
@@ -52,11 +54,11 @@ class TriApiClient:
             return response
         except requests.exceptions.HTTPError as http_err:
             raise TriApiError(f"An error occured: {http_err}")
-    
+
     def get(self, *args, **kwargs) -> requests.Response:
         """GET a request from the IPUMS API"""
         return self.request("get", *args, **kwargs)
-    
+
 
 class Table(TriApiClient):
     def __init__(
@@ -67,19 +69,21 @@ class Table(TriApiClient):
         self.name = name
         self.table_url = f"{self.base_url}/{self.name.upper()}"
         self.rows = self._get_rows()
-        self.segments = list(self._divide_rows_into_chunks(range(0, self.rows + 1), 10000))
-        
+        self.segments = list(
+            self._divide_rows_into_chunks(range(0, self.rows + 1), 10000)
+        )
+
     def _get_rows(self):
         count = self.get(f"{self.table_url}/COUNT/JSON")
         total_rows = count.json()[0]["TOTALQUERYRESULTS"]
         return total_rows
-    
+
     def _divide_rows_into_chunks(self, l, n):
         # looping till length l
         for i in range(0, len(l), n):
-            l2 = l[i:i + n]
+            l2 = l[i : i + n]
             yield (l2[0], l2[-1])
-        
+
     # In theory I should be able to do all of this with json returns,
     # but the /JSON option is giving me fits and I don't know why,
     # but CSV is working so I am rolling with that for now.
@@ -96,7 +100,7 @@ class Table(TriApiClient):
         body = "".join(body_list)
         serialized_csv = f"{head}\n{body}"
         return serialized_csv
-    
+
     def _csv_string_to_df(self, csv_string):
         # make it a table
         table_data = StringIO(csv_string)
@@ -105,19 +109,19 @@ class Table(TriApiClient):
         # column names and retain bad/incomplete lines. Test on Forms
         table_df = pd.read_csv(table_data, sep=",", on_bad_lines="skip")
         return table_df
-    
-    def  whole_table(self, url):
+
+    def whole_table(self, url):
         if self.rows < 10001:
             df = self.get_row_range(0, self.rows, url)
         else:
             # use all but 2 cpu
-            df_segments = Parallel(n_jobs=-3, verbose=1)\
-                                    (delayed(self.get_row_range)
-                                            (str(i[0]), str(i[1]), url) 
-                                    for i in self.segments)
+            df_segments = Parallel(n_jobs=-3, verbose=1)(
+                delayed(self.get_row_range)(str(i[0]), str(i[1]), url)
+                for i in self.segments
+            )
             df = pd.concat(df_segments, ignore_index=True)
         return df
-        
+
     def get_row_range(self, row_min, row_max, url=None):
         # if url not specified, default standard table url
         if url is None:
@@ -135,11 +139,10 @@ class Table(TriApiClient):
         csv_str = self.get(f"{_url}")
         csv_str.raise_for_status()
         # put it into a data frame
-        table_df = self._csv_string_to_df(csv_str.text)   
+        table_df = self._csv_string_to_df(csv_str.text)
         return table_df
-    
-    def filter(self, 
-               filters: Dict[str, Union[str, List[str]]]={}) -> pd.DataFrame: 
+
+    def filter(self, filters: Dict[str, Union[str, List[str]]] = {}) -> pd.DataFrame:
         # split filters into strings and lists
         single_filters = [f for f in filters.keys() if isinstance(filters[f], str)]
         list_filters = [f for f in filters.keys() if isinstance(filters[f], list)]

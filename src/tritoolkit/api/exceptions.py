@@ -11,5 +11,6 @@ class TriApiException(Exception):
 class TransientTriApiException(TriApiException):
     pass
 
+
 class TriApiError(TriApiException):
     """Represents the case when an unknown API error occurs."""

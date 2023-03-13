@@ -6,7 +6,7 @@ import numpy as np
 def dms_to_dd(dms_value: Any) -> float:
     """
     Utility function to convert degrees minutes seconds coordinates to decimal degrees.
-    
+
     Args:
         dms_value: A degrees-minutes-seconds location value.
 
@@ -20,7 +20,7 @@ def dms_to_dd(dms_value: Any) -> float:
             dms_value = str(int(dms_value))
     except ValueError:
         return np.nan
-    
+
     # break the dd_value string into 3 parts
     if dms_value[0] == "-":
         # if the string less than 7 digits, left pad it
@@ -39,4 +39,3 @@ def dms_to_dd(dms_value: Any) -> float:
     print(dms_value, degrees, minutes, seconds)
     dd_value = degrees + (minutes / 60) + (seconds / 3600)
     return round(dd_value, 8)
-
