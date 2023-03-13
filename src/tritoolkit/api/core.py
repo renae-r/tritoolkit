@@ -1,6 +1,6 @@
 from io import StringIO
 from functools import wraps
-from typing import Optional
+from typing import Optional, Union, Dict, List
 import warnings
 
 import pandas as pd
@@ -61,7 +61,7 @@ class TriApiClient:
 class Table(TriApiClient):
     def __init__(
         self,
-        name
+        name: str = None,
     ):
         super().__init__()
         self.name = name
@@ -138,11 +138,16 @@ class Table(TriApiClient):
         table_df = self._csv_string_to_df(csv_str.text)   
         return table_df
     
-    def filter_on_single_values(self, filter_dict={}):
+    def filter(self, 
+               filters: Dict[str, Union[str, List[str]]]={}) -> pd.DataFrame: 
+        # split filters into strings and lists
+        single_filters = [f for f in filters.keys() if isinstance(filters[f], str)]
+        list_filters = [f for f in filters.keys() if isinstance(filters[f], list)]
+        # first assemble url based on single filters
         updated_url = [self.table_url]
         # TODO: better error handling for non-existant columns
-        for col in filter_dict.keys():
-            updated_url.append(f"{col.upper()}/{filter_dict[col.upper()]}")
+        for col in single_filters:
+            updated_url.append(f"{col.upper()}/{filters[col.upper()]}")
         updated_url.append("CSV")
         filtered_url = "/".join(updated_url)
         csv_str = self.get(filtered_url).text
@@ -150,16 +155,10 @@ class Table(TriApiClient):
         # if the table has exactly 10001 records, that means that
         # the request maxed out the number of rows that could be requested
         # in this case, we'll grab and filter the whole table...
-        # should probably raise a warning of some kind
-        # TODO: raise a warning - let the user figure out what to do
         if len(table_df.index) == 10001:
-            print("...need to look at the whole table")
-            table_df = self._whole_table(filtered_url)
-            for filter in filter_dict.keys():
-                table_df = table_df[table_df[filter] == filter_dict[filter]]
+            table_df = self.whole_table(filtered_url)
+        # once we're sure we have all rows required from the single-value filters
+        # filter the resulting data frame based on the list filters
+        for col in list_filters:
+            table_df = table_df[table_df[col].isin(filters[col])]
         return table_df
-    
-    def filter_on_multiple_values(self, filter_column, filter_values):
-        df = self._whole_table(self.table_url)
-        filtered_df = df[df[filter_column].isin(filter_values)]
-        return filtered_df
