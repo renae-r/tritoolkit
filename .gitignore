@@ -1,1 +1,24 @@
+# Python cruft
+*.pyc
 __pycache__
+*.egg-info
+.venv
+.pytest_cache
+dist
+
+# Editor cruft
+.vscode
+.*.swp
+
+# Secrets
+.env.test
+
+# Docs
+docs/_build/
+docs/source/CONTRIBUTING.md
+docs/source/reference/generated/
+
+# codecov
+.coverage
+codecov
+coverage.xml
