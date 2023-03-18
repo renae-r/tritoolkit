@@ -14,7 +14,7 @@ dist
 .env.test
 
 # Docs
-docs/_build/
+docs/build/
 docs/source/CONTRIBUTING.md
 docs/source/reference/generated/
 
