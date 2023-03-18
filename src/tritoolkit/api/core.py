@@ -41,6 +41,16 @@ class TriApiClient:
         session: Optional[requests.Session] = None,
         base_url: Optional[str] = "https://data.epa.gov/efservice",
     ):
+        """
+        Class for retrieving TRI data via API
+
+        Args:
+            num_retries: number of times a request will be retried before
+                        raising `TransientTriApiException`
+            session: requests session object
+            base_url: Envirofacts TRI url
+
+        """
         self.num_retries = num_retries
         self.base_url = base_url
         self.session = session or requests.session()
@@ -67,6 +77,12 @@ class Table(TriApiClient):
         self,
         name: str = None,
     ):
+        """
+        Class for retrieving and filtering TRI database tables via API
+
+        Args:
+            name: The name of a table in the TRI database
+        """
         super().__init__()
         self.name = name
         self.table_url = f"{self.base_url}/{self.name.upper()}"
