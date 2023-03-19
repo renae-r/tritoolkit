@@ -80,6 +80,9 @@ def to_geopandas_df(df: pd.DataFrame,
     gdf = gpd.GeoDataFrame(df,
                            geometry=gpd.points_from_xy(df[lon_field], 
                                                        df[lat_field]))
+    
+    # set crs
+    gdf.set_crs(epsg=4326, inplace=True)
     return gdf
 
 
