@@ -1,0 +1,40 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - test_geocoder
+    method: GET
+    uri: https://nominatim.openstreetmap.org/search?q=7320+MILL+RD+FLORENCE+SC+29506&format=json&limit=1
+  response:
+    body:
+      string: "[{\"place_id\":104780821,\"licence\":\"Data \xA9 OpenStreetMap contributors,
+        ODbL 1.0. https://osm.org/copyright\",\"osm_type\":\"way\",\"osm_id\":12391207,\"boundingbox\":[\"34.186734\",\"34.2003007\",\"-79.5944004\",\"-79.5803907\"],\"lat\":\"34.1941851\",\"lon\":\"-79.586317\",\"display_name\":\"Paper
+        Mill Road, Florence County, South Carolina, United States\",\"class\":\"highway\",\"type\":\"tertiary\",\"importance\":0.3}]"
+    headers:
+      Access-Control-Allow-Methods:
+      - OPTIONS,GET
+      Access-Control-Allow-Origin:
+      - '*'
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Sun, 19 Mar 2023 23:47:03 GMT
+      Keep-Alive:
+      - timeout=20
+      Server:
+      - nginx
+      Transfer-Encoding:
+      - chunked
+    status:
+      code: 200
+      message: OK
+version: 1
