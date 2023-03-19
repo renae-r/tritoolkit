@@ -1,4 +1,4 @@
-from typing import Any, Optional
+from typing import Any, Optional, Dict
 import warnings
 
 import pandas as pd
@@ -117,7 +117,19 @@ def tri_points_to_polygons(gdf: gpd.GeoDataFrame, shape_file: str) -> gpd.GeoDat
     return tri_polygons
 
 
-def geocode_from_raw_address(address_string, geolocator_obj, attempt=1, num_retries=5):
+def geocode_from_raw_address(address_string: str, geolocator_obj, attempt=1, num_retries: int =5):
+    """
+    Convenience method for geocoding address strings.
+
+    Args:
+        address_string: Address
+        geolocator_obj: A geopy Nominatim geolocator object
+        attempt: Current attempt to connect to Geocoder. Always set to 1
+        num_retries: The number of attempts to reconnect when the Geocoder is unavailable. Defaults to 5.
+
+    Returns:
+        Geocoder response. In the event no response can be reached, returns NaN
+    """
     geocode = RateLimiter(
         geolocator_obj.geocode,
         min_delay_seconds=1,
@@ -144,7 +156,16 @@ def geocode_from_raw_address(address_string, geolocator_obj, attempt=1, num_retr
         return np.nan
 
 
-def geocode_wrapper(address_components):
+def geocode_wrapper(address_components: Dict[str, str]):
+    """
+    Convenience method to pass a set of address parts to `geocode_from_raw_address()`.
+
+    Args:
+        address_components: Dictionary of address parts, such as street address, city, state, etc.
+
+    Returns:
+        geopy location object
+    """
     geolocator = Nominatim(user_agent="tritoolkit")
     address_string = " ".join(
         [
