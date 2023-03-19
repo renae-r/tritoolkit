@@ -17,6 +17,7 @@ from tritoolkit.api.exceptions import (
     TriApiException,
 )
 
+
 @pytest.fixture(scope="module")
 def mock_api() -> str:
     # TODO: Would be good to randomly assign a port and return it
@@ -37,8 +38,6 @@ def api_client(environment_variables, mock_api: str) -> TriApiClient:
     return client
 
 
-
-
 @pytest.mark.vcr
 def test_table_filter_on_single_value(fixtures_path: Path):
     """
@@ -54,8 +53,9 @@ def test_table_filter_on_single_value(fixtures_path: Path):
 
     assert chem_info_pkl.equals(chem_info_table)
 
-    reporting_forms = Table("TRI_REPORTING_FORM").filter(filters={"TRI_CHEM_ID": "N150",
-                                                                  "REPORTING_YEAR": "2021"})
+    reporting_forms = Table("TRI_REPORTING_FORM").filter(
+        filters={"TRI_CHEM_ID": "N150", "REPORTING_YEAR": "2021"}
+    )
     # multiple single values# unpickle the test df
     with open(fixtures_path / "reporting_forms_dlc_2021.pkl", "rb") as infile:
         reporting_forms_pkl = pickle.load(infile)
@@ -72,11 +72,12 @@ def test_table_filter_on_multiple_values(fixtures_path: Path):
     with open(fixtures_path / "facilities_list.pkl", "rb") as infile:
         facilities_list = pickle.load(infile)
 
-    dioxin_facilities = Table("TRI_FACILITY").filter(filters={"TRI_FACILITY_ID": facilities_list})
+    dioxin_facilities = Table("TRI_FACILITY").filter(
+        filters={"TRI_FACILITY_ID": facilities_list}
+    )
 
     # unpickle the test df
     with open(fixtures_path / "facilities_dlc_2017_2021.pkl", "rb") as infile:
         dioxin_facilities_pkl = pickle.load(infile)
 
     assert dioxin_facilities_pkl.equals(dioxin_facilities)
-

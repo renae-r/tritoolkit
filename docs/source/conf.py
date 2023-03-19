@@ -28,10 +28,10 @@ sys.path.insert(0, os.path.abspath("../../src/tritoolkit"))
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'tritoolkit'
-copyright = '2023, Renae Rodgers'
-author = 'Renae Rodgers'
-release = '0.1.0'
+project = "tritoolkit"
+copyright = "2023, Renae Rodgers"
+author = "Renae Rodgers"
+release = "0.1.0"
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -43,10 +43,10 @@ extensions = [
     "sphinx.ext.doctest",
     "sphinx.ext.napoleon",  # N.B. napoleon must be before autodocs_typehints
     "sphinx_autodoc_typehints",
-    #"sphinx.ext.linkcode",  # link to github, see linkcode_resolve() below
+    # "sphinx.ext.linkcode",  # link to github, see linkcode_resolve() below
     "sphinx_copybutton",
     "myst_parser",
-    ]
+]
 
 source_suffix = {
     ".rst": "restructuredtext",
@@ -60,7 +60,7 @@ shutil.copyfile(
     os.path.join(root_dir, "CONTRIBUTING.md"),
 )
 
-templates_path = ['_templates']
+templates_path = ["_templates"]
 
 # The master toctree document.
 master_doc = "index"
@@ -76,8 +76,8 @@ autodoc_default_options = {
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 html_title = "tritoolkit"
-html_theme = 'furo'
-html_static_path = ['_static']
+html_theme = "furo"
+html_static_path = ["_static"]
 
 tml_css_files = ["default.css"]
 

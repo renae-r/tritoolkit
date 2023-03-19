@@ -70,7 +70,7 @@ class TriApiClient:
     def get(self, *args, **kwargs) -> requests.Response:
         """GET a request from the TRI API"""
         return self.request("get", *args, **kwargs)
-        
+
 
 class Table(TriApiClient):
     def __init__(
@@ -143,7 +143,7 @@ class Table(TriApiClient):
         # put it into a data frame
         table_df = self._csv_string_to_df(csv_str.text)
         return table_df
-    
+
     def all_rows(self, url: Optional[str] = None) -> pd.DataFrame:
         """
         Retrieves all rows in the table
@@ -163,7 +163,7 @@ class Table(TriApiClient):
             )
             df = pd.concat(df_segments, ignore_index=True)
         return df
-    
+
     def _fix_filter_strings(self, filter_value: str) -> str:
         # replace spaces with %20
         fixed_filter_value = filter_value.replace(" ", "%20")
