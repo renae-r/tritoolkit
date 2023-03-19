@@ -15,6 +15,8 @@ def test_dms_to_dd():
 
     assert geography.dms_to_dd(-324528.0) == -32.757777777777775
 
+    assert geography.dms_to_dd(1005305.0) == 100.88472222222222
+
 
 def test_to_gopandas_df(fixtures_path: Path):
     # unpickle the test df

@@ -39,24 +39,20 @@ def dms_to_dd(dms_value: Any) -> float:
             dms_value = str(int(dms_value))
     except ValueError:
         return np.nan
-
-    # break the dd_value string into 3 parts
-    if dms_value[0] == "-":
-        # if the string less than 7 digits, left pad it
-        if len(dms_value) < 7:
-            dms_value = dms_value.ljust(7, "0")
-        degrees = int(dms_value[1:3])
-        minutes = int(dms_value[3:5])
+    # maximum string length is 8
+    # 1 for the -, 3 for d, 2 for m, 2 for s
+    if len(dms_value) < 8:
+        dms_value = dms_value.zfill(8)
+    if "-" in dms_value:
+        dms_value = dms_value.replace("-", "0")
+        degrees = int(dms_value[:4])
+        minutes = int(dms_value[4:6])
         seconds = int(dms_value[-2:])
-        dd_value = -(degrees + (minutes / 60) + (seconds / 3600))
+        dd_value = - (degrees + (minutes / 60) + (seconds / 3600))
     else:
-        # if the string less than 6 digits, left pad it
-        if len(dms_value) < 6:
-            dms_value = dms_value.ljust(6, "0")
-        degrees = int(dms_value[:2])
-        minutes = int(dms_value[2:4])
+        degrees = int(dms_value[:4])
+        minutes = int(dms_value[4:6])
         seconds = int(dms_value[-2:])
-        print(dms_value, degrees, minutes, seconds)
         dd_value = degrees + (minutes / 60) + (seconds / 3600)
     return dd_value
 
