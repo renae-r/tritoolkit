@@ -37,15 +37,11 @@ jobs:
       run: poetry install --with docs --no-interaction
 
     - name: Build documentation
-      run: |
-        mkdir gh-pages
-        touch gh-pages/.nojekyll
-        cd docs/
-        poetry run sphinx-build -b html . build
-        cp -r build/* ../gh-pages/        
+      run: cd docs && poetry run make html
+
     - name: Deploy documentation
       if: ${{ github.event_name == 'push' }}
       uses: JamesIves/github-pages-deploy-action@v4
       with:
         branch: gh-pages
-        folder: gh-pages
+        folder: docs/build/html
