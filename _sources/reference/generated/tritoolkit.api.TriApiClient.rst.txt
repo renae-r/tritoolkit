@@ -1,0 +1,6 @@
+﻿tritoolkit.api.TriApiClient
+===========================
+
+.. currentmodule:: tritoolkit.api
+
+.. autoclass:: TriApiClient

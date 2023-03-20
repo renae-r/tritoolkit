@@ -1,0 +1,6 @@
+﻿tritoolkit.geography.to\_geopandas\_df
+======================================
+
+.. currentmodule:: tritoolkit.geography
+
+.. autofunction:: to_geopandas_df

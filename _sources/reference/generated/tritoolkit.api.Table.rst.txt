@@ -1,0 +1,6 @@
+﻿tritoolkit.api.Table
+====================
+
+.. currentmodule:: tritoolkit.api
+
+.. autoclass:: Table

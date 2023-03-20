@@ -1,0 +1,6 @@
+﻿tritoolkit.geography.geocoder\_wrapper
+======================================
+
+.. currentmodule:: tritoolkit.geography
+
+.. autofunction:: geocoder_wrapper

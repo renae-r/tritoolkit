@@ -1,0 +1,6 @@
+﻿tritoolkit.geography.dms\_to\_dd
+================================
+
+.. currentmodule:: tritoolkit.geography
+
+.. autofunction:: dms_to_dd

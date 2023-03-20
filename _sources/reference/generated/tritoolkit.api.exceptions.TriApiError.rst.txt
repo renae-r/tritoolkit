@@ -1,0 +1,6 @@
+﻿tritoolkit.api.exceptions.TriApiError
+=====================================
+
+.. currentmodule:: tritoolkit.api.exceptions
+
+.. autoexception:: TriApiError

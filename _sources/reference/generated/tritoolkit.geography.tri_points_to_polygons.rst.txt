@@ -1,0 +1,6 @@
+﻿tritoolkit.geography.tri\_points\_to\_polygons
+==============================================
+
+.. currentmodule:: tritoolkit.geography
+
+.. autofunction:: tri_points_to_polygons

@@ -1,0 +1,6 @@
+﻿tritoolkit.geography.geocode\_from\_raw\_address
+================================================
+
+.. currentmodule:: tritoolkit.geography
+
+.. autofunction:: geocode_from_raw_address
