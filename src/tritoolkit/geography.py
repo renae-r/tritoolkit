@@ -48,7 +48,7 @@ def dms_to_dd(dms_value: Any) -> float:
         degrees = int(dms_value[:4])
         minutes = int(dms_value[4:6])
         seconds = int(dms_value[-2:])
-        dd_value = - (degrees + (minutes / 60) + (seconds / 3600))
+        dd_value = -(degrees + (minutes / 60) + (seconds / 3600))
     else:
         degrees = int(dms_value[:4])
         minutes = int(dms_value[4:6])
@@ -113,7 +113,9 @@ def tri_points_to_polygons(gdf: gpd.GeoDataFrame, shape_file: str) -> gpd.GeoDat
     return tri_polygons
 
 
-def geocode_from_raw_address(address_string: str, geolocator_obj: Nominatim, attempt=1, num_retries: int =5):
+def geocode_from_raw_address(
+    address_string: str, geolocator_obj: Nominatim, attempt=1, num_retries: int = 5
+):
     """
     Convenience method for geocoding address strings.
 
