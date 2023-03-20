@@ -58,8 +58,8 @@ def test_geocode_from_raw_address():
 
 
 @pytest.mark.vcr
-def test_geocode_wrapper():
-    lat, lon = geography.geocode_wrapper({
+def test_geocoder_wrapper():
+    lat, lon = geography.geocoder_wrapper({
         "STREET_ADDRESS": "512 LIBERTY EXPRESSWAY SE",
         "CITY_NAME": "ALBANY",
         "COUNTY_NAME": "DOUGHERTY",
@@ -68,7 +68,7 @@ def test_geocode_wrapper():
     })
     assert (lat, lon) == (31.54827665, -84.10798120068999)
 
-    lat, lon = geography.geocode_wrapper({
+    lat, lon = geography.geocoder_wrapper({
         "STREET_ADDRESS": "7320 MILL RD",
         "CITY_NAME": "FLORENCE",
         "COUNTY_NAME": "FLORENCE",

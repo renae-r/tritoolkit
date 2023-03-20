@@ -113,7 +113,7 @@ def tri_points_to_polygons(gdf: gpd.GeoDataFrame, shape_file: str) -> gpd.GeoDat
     return tri_polygons
 
 
-def geocode_from_raw_address(address_string: str, geolocator_obj, attempt=1, num_retries: int =5):
+def geocode_from_raw_address(address_string: str, geolocator_obj: Nominatim, attempt=1, num_retries: int =5):
     """
     Convenience method for geocoding address strings.
 
@@ -152,7 +152,7 @@ def geocode_from_raw_address(address_string: str, geolocator_obj, attempt=1, num
         return np.nan
 
 
-def geocode_wrapper(address_components: Dict[str, str]):
+def geocoder_wrapper(address_components: Dict[str, str]):
     """
     Convenience method to pass a set of address parts to `geocode_from_raw_address()`.
 
