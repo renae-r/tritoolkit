@@ -192,7 +192,7 @@ class Table(TriApiClient):
         for col in single_filters:
             # fix strings for url
             filter_value = self._fix_filter_strings(filters[col.upper()])
-            updated_url.append(f"{col.upper()}/{filter_value}")
+            updated_url.append(f"{col.upper()}/{str(filter_value)}")
         updated_url.append("CSV")
         filtered_url = "/".join(updated_url)
         csv_str = self.session.get(filtered_url).text
