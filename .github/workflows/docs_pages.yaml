@@ -39,7 +39,7 @@ jobs:
     - name: Build documentation
       run: |
         cd docs && poetry run make html
-        touch docs/build/html/.nojekyll
+        touch build/html/.nojekyll
 
     - name: Deploy documentation
       if: ${{ github.event_name == 'push' }}
