@@ -37,7 +37,9 @@ jobs:
       run: poetry install --with docs --no-interaction
 
     - name: Build documentation
-      run: cd docs && poetry run make html
+      run: |
+        cd docs && poetry run make html
+        touch docs/build/html/.nojekyll
 
     - name: Deploy documentation
       if: ${{ github.event_name == 'push' }}
