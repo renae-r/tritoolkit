@@ -106,12 +106,15 @@ class Table(TriApiClient):
     # but the /JSON option is causing internal server errors and I don't know why,
     # but CSV is working so I am rolling with that for now.
     def _csv_string_to_df(self, csv_string: str) -> pd.DataFrame:
+        # get the header
+        csv_list = csv_string.split("\n")
+        header = csv_list[0].split(",")
         # make it a table
         table_data = StringIO(csv_string)
         # skip bad lines for now
         # TODO: incorporate database schema info to be able to specify
         # column names and retain bad/incomplete lines. Test on Forms
-        table_df = pd.read_csv(table_data, sep=",", on_bad_lines="skip")
+        table_df = pd.read_csv(table_data, sep=",", names=header, skiprows=1, on_bad_lines="skip")
         return table_df
 
     def get_row_range(self, row_min: str, row_max: str, url: str = None):
@@ -165,6 +168,18 @@ class Table(TriApiClient):
         return df
 
     def _fix_filter_strings(self, filter_value: str) -> str:
+        # hack to handle operators
+        if filter_value[0] == "<":
+            filter_value.replace("<", "/")
+            filter_value = f"<{filter_value}"
+        elif filter_value[0] == ">":
+            print("...should be here")
+            filter_value = filter_value.replace(">", "/")
+            filter_value = f">{filter_value}"
+            print("fixed value", filter_value)
+        elif filter_value[:1] == "!=":
+            filter_value.replace("!=", "/")
+            filter_value = f"!={filter_value}"
         # replace spaces with %20
         fixed_filter_value = filter_value.replace(" ", "%20")
         # replace dashes with %2D
